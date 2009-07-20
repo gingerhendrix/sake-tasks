@@ -1,0 +1,9 @@
+namespace :conky do
+
+  desc "Print a hello world conky string" 
+  task :server do
+    status = `sake server:status`
+    status = status.split("\n").map { |line| '${voffset 4}${offset 4}' + line.split(":")[0] + "${alignr}" + line.split(":")[1] }.join("\n")
+    puts status + "\n";
+  end
+end
