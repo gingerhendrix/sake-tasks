@@ -1,0 +1,15 @@
+
+namespace 'new' do
+  desc "Creates a new ruby (gem) project"
+  task :gem do
+    require 'highline'
+
+    #Stolen from install_public key sake    
+    h = HighLine.new
+    not_blank = Proc.new { |s| !s.empty? }
+    def not_blank.to_s; "not blank"; end
+
+    name = h.ask("Project Hostname: ") { |q| q.validate = not_blank }
+    sh "newgem -T rspec -i cucumber -g /home/ga/workspace/#{name}"
+  end
+end
